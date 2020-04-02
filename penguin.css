@@ -13,3 +13,7 @@ tr{
     border: 2px solid rebeccapurple; 
 }
 
+.bad
+{
+    background-color: red;
+}
