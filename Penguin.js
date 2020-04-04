@@ -41,6 +41,22 @@ var finalhw = function(student){return getHGrade(student) *.15 *2}
 var finalq = function(student){return getQGrade(student) *10 *.2}
 var finalt = function(student){return getTGrade(student) *.3} 
 var finalcourse = function(student){return finalgrade(student)+ finalhw(student)+finalq(student)+finalt(student)}
+var p1 = function(student){
+   var row = 
+        d3.select("table tbody")
+    
+        .selectAll("tr")
+        .data(student)
+        .enter()
+        .append("tr")
+        .classed("row", true)
+        row.append("td")
+            .text(function(student)
+                 {return (student.final[0].grade)
+                 })
+         }
+            
+    
 
 
 
@@ -64,6 +80,7 @@ var madeRows = function(student)
                 }
             })
         row.append("td")
+            .classed("pic", true)
             .append("img")
             .attr("src", function(student){return "imgs/"+student.picture})
         row.append("td")
@@ -177,7 +194,7 @@ var madeRows = function(student)
     
     
 });
- d3.select("tbody tr")
+ d3.selectAll("tbody tr")
     .remove();
     madeRows(student);
     
@@ -197,7 +214,7 @@ var madeRows = function(student)
     
     
 });
- d3.select("tbody tr")
+ d3.selectAll("tbody tr")
     .remove();
     madeRows(student);
     
@@ -217,7 +234,7 @@ var madeRows = function(student)
     
     
 });
- d3.select("tbody tr")
+ d3.selectAll("tbody tr")
     .remove();
     madeRows(student);
     
@@ -237,7 +254,7 @@ var madeRows = function(student)
     
     
 });
- d3.select("tbody tr")
+ d3.selectAll("tbody tr")
     .remove();
     madeRows(student);
     
@@ -257,12 +274,22 @@ var madeRows = function(student)
     
     
 });
- d3.select("tbody tr")
+ d3.selectAll("tbody tr")
     .remove();
     madeRows(student);
     
 }) 
+   
+    d3.select(".pic").on("click", function() 
+            { 
+                d3.selectAll("tbody tr")
+                    .remove();
+                p1(student);
     
+
+
+    
+}) 
     
 }
 

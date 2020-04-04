@@ -7,7 +7,8 @@ table{
     border: 2px solid rebeccapurple;
 }
 td{
-    border: 2px solid rebeccapurple
+    border: 2px solid rebeccapurple;
+    box-shadow: 4px 4px #888888;
 }
 tr{
     border: 2px solid rebeccapurple; 
@@ -16,4 +17,13 @@ tr{
 .bad
 {
     background-color: red;
+}
+th{
+    font-family: cursive
+}
+body{
+    font-family: cursive
+}
+h3{
+    font-size: 12px;
 }
