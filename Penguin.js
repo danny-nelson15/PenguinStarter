@@ -42,7 +42,7 @@ var finalq = function(student){return getQGrade(student) *10 *.2}
 var finalt = function(student){return getTGrade(student) *.3} 
 var finalcourse = function(student){return finalgrade(student)+ finalhw(student)+finalq(student)+finalt(student)}
 var p1 = function(student){
-   var row = 
+  var row = 
         d3.select("table tbody")
     
         .selectAll("tr")
@@ -51,12 +51,21 @@ var p1 = function(student){
         .append("tr")
         .classed("row", true)
         row.append("td")
-            .text(function(student)
-                 {return (student.final[0].grade)
-                 })
-         }
-            
-    
+            .classed("pic", true)
+            .append("img")
+            .attr("src", function(student){return "imgs/"+student.picture})
+        .text(function(student)
+             {return (student.final[0].grade)})
+        row.append("td")
+        .text(function(student)
+             {return (student.homework.grade)})
+    row.append("td")
+        .text(function(student)
+             {return (student.quizes.grade)})
+    row.append("td")
+        .text(function(student)
+             {return (student.test.grade)})
+}
 
 
 
@@ -180,7 +189,7 @@ var madeRows = function(student)
         })
    
     d3.select("#final").on("click", function() 
-            { console.log("hey");
+            { 
     student.sort(function(charA, charB)
             {
     if (finalgrade(charA) == 
@@ -260,7 +269,7 @@ var madeRows = function(student)
     
 })  
    d3.select("#total").on("click", function() 
-            { console.log("hey");
+            { 
     student.sort(function(charA, charB)
             {
     if (finalcourse(charA) == 
@@ -280,16 +289,23 @@ var madeRows = function(student)
     
 }) 
    
-    d3.select(".pic").on("click", function() 
+    d3.select(".pic", this).on("click", function() 
             { 
                 d3.selectAll("tbody tr")
                     .remove();
-                p1(student);
+                p1(student[0]);
     
+   })
+ 
 
-
-    
-}) 
+    d3.select("#button").on("click", function()
+        {
+         d3.selectAll("tbody tr") 
+            .remove();
+        madeRows(student);
+        
+        
+    })
     
 }
 
