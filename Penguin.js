@@ -1,7 +1,8 @@
+var original = [];
 var classDataPromise = d3.json("classData.json");
     classDataPromise.then (function(student){
-            console.log("worked", student)
-                                      ;
+            console.log("worked", student);
+                                     original = student.slice(); 
                                      madeRows(student)
                                       
                                       },
@@ -42,29 +43,11 @@ var finalq = function(student){return getQGrade(student) *10 *.2}
 var finalt = function(student){return getTGrade(student) *.3} 
 var finalcourse = function(student){return finalgrade(student)+ finalhw(student)+finalq(student)+finalt(student)}
 var p1 = function(student){
-  var row = 
-        d3.select("table tbody")
-    
-        .selectAll("tr")
-        .data(student)
-        .enter()
-        .append("tr")
-        .classed("row", true)
-        row.append("td")
-            .classed("pic", true)
-            .append("img")
-            .attr("src", function(student){return "imgs/"+student.picture})
-        .text(function(student)
-             {return (student.final[0].grade)})
-        row.append("td")
-        .text(function(student)
-             {return (student.homework.grade)})
-    row.append("td")
-        .text(function(student)
-             {return (student.quizes.grade)})
-    row.append("td")
-        .text(function(student)
-             {return (student.test.grade)})
+    d3.select("#main")
+    .classed("hidden", false)
+    d3.select("#photo img")
+    .attr("src", "imgs/"+student.picture);
+        
 }
 
 
@@ -209,7 +192,7 @@ var madeRows = function(student)
     
 })
     d3.select("#HW").on("click", function() 
-            { console.log("hey");
+            { 
     student.sort(function(charA, charB)
             {
     if (finalhw(charA) == 
@@ -229,7 +212,7 @@ var madeRows = function(student)
     
 })
   d3.select("#quiz").on("click", function() 
-            { console.log("hey");
+            { 
     student.sort(function(charA, charB)
             {
     if (finalq(charA) == 
@@ -249,7 +232,7 @@ var madeRows = function(student)
     
 })  
   d3.select("#test").on("click", function() 
-            { console.log("hey");
+            { 
     student.sort(function(charA, charB)
             {
     if (finalt(charA) == 
@@ -289,11 +272,11 @@ var madeRows = function(student)
     
 }) 
    
-    d3.select(".pic", this).on("click", function() 
+    d3.selectAll(".pic").on("click", function(stud) 
             { 
                 d3.selectAll("tbody tr")
                     .remove();
-                p1(student[0]);
+                p1(stud);
     
    })
  
@@ -302,7 +285,10 @@ var madeRows = function(student)
         {
          d3.selectAll("tbody tr") 
             .remove();
-        madeRows(student);
+        d3.select("#main")
+            .classed("hidden", true)
+        var savecopy = original.slice();
+        madeRows(savecopy);
         
         
     })
